@@ -13,6 +13,18 @@ PrefabInstance:
       value: ManItemOnField
       objectReference: {fileID: 0}
     - target: {fileID: 4390814750862370782, guid: 4e1ab865b19ac5043b8ea5a3e03480d1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4390814750862370782, guid: 4e1ab865b19ac5043b8ea5a3e03480d1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4390814750862370782, guid: 4e1ab865b19ac5043b8ea5a3e03480d1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4390814750862370782, guid: 4e1ab865b19ac5043b8ea5a3e03480d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -60,6 +72,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -284627385986098231, guid: 211f746eacd2c2b4a9857776e6b0b8de, type: 3}
+    - target: {fileID: 8821169263975811373, guid: 4e1ab865b19ac5043b8ea5a3e03480d1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
