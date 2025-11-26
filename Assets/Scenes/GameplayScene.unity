@@ -141,6 +141,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e951f35fe5a9241a80bbca6623f419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: App::HUD
+  targetItemsContainer: {fileID: 0}
+  targetItemOnUIPrefab: {fileID: 0}
+  lvlText: {fileID: 0}
+  timerText: {fileID: 0}
+  timeFormat: 
 --- !u!1 &363642540
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +316,7 @@ MonoBehaviour:
     TypeName: App.LifetimeScopes.GameLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
+  itemConfigs: {fileID: 11400000, guid: 23ab21048bbdbd1449c25449c7cc4578, type: 2}
 --- !u!4 &398423166
 Transform:
   m_ObjectHideFlags: 0
