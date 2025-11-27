@@ -1,21 +1,13 @@
-﻿using App.GameFSM.States;
+﻿using App.Core.FSM;
+using App.GameFSM.States;
 using VContainer;
 
 namespace App.Factories
 {
-    public class GameStateFactory : IGameStateFactory
+    public class GameStateFactory : BaseStateFactory<IGameState>
     {
-        private readonly IObjectResolver _objectResolver;
-
-        public GameStateFactory(IObjectResolver objectResolver)
+        public GameStateFactory(IObjectResolver objectResolver) : base(objectResolver)
         {
-            _objectResolver = objectResolver;
-        }
-
-        public T Create<T>() where T: IGameState
-        {
-            return _objectResolver.Resolve<T>();
         }
     }
-
 }
