@@ -8,9 +8,9 @@ namespace App.GameFSM
     public class GameStateMachine : StateMachine, IInitializable, ITickable
     {
         public bool GameplaySceneLoaded { get; set; } = false;
-        private readonly IGameStateFactory _stateFactory;
+        private readonly IStateFactory<IGameState> _stateFactory;
 
-        public GameStateMachine(IGameStateFactory stateFactory)
+        public GameStateMachine(IStateFactory<IGameState> stateFactory)
         {
             _stateFactory = stateFactory;
         }
