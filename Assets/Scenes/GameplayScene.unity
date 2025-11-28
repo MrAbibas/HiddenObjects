@@ -572,7 +572,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 710930814288263756, guid: e2546a03c82c98c448dcc64aec0143df, type: 3}
       propertyPath: m_Name
-      value: CollectedItemSlotsCanvas
+      value: CollectedItemPanelCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 1349016961988123368, guid: e2546a03c82c98c448dcc64aec0143df, type: 3}
       propertyPath: m_AnchorMax.y
