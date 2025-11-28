@@ -15,13 +15,15 @@ namespace App.Gameplay.GameplayFSM.States
         private readonly IItemCollector _itemCollector;
         private readonly CollectedItemsContainer _collectedItemsContainer;
         private readonly CollectedItemsPanel _collectedItemsPanel;
+        private readonly LeftToCollectItemsContainer _leftToCollectItemsContainer;
 
         public MainLoopGameplayState(Timer levelTimer,
             HUD hud,
             LevelConfig levelConfig,
             IItemCollector itemCollector,
             CollectedItemsContainer collectedItemsContainer,
-            CollectedItemsPanel collectedItemsPanel)
+            CollectedItemsPanel collectedItemsPanel,
+            LeftToCollectItemsContainer leftToCollectItemsContainer)
         {
             _levelTimer = levelTimer;
             _hud = hud;
@@ -29,15 +31,17 @@ namespace App.Gameplay.GameplayFSM.States
             _itemCollector = itemCollector;
             _collectedItemsContainer = collectedItemsContainer;
             _collectedItemsPanel = collectedItemsPanel;
+            _leftToCollectItemsContainer = leftToCollectItemsContainer;
         }
 
         public void Enter()
         {
-            _hud.Init(_levelConfig.targetItems);
             _itemCollector.Initialize();
             _itemCollector.EnableCollect();
             _collectedItemsPanel.Initialize();
             _collectedItemsContainer.Initialize();
+            _leftToCollectItemsContainer.Initialize();
+            _hud.Initialize();
         }
 
         public void Update()

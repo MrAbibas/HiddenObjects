@@ -38,8 +38,10 @@ namespace App.UI.HUD
         public void Hide()
         {
             _countText.text = "0";
-            _image.rectTransform.DOScale(Vector3.one * hideEndScale, hideDuration).SetEase(Ease.InOutBack);
-            Destroy(gameObject);
+            DOTween.Kill(_image.rectTransform);
+            _image.rectTransform.DOScale(Vector3.one * hideEndScale, hideDuration)
+                .SetEase(Ease.InOutBack)
+                .OnComplete(() => Destroy(gameObject));
         }
     }
 }

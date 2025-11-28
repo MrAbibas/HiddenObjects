@@ -31,6 +31,7 @@ namespace App.Gameplay.ItemCollecting
             {
                 if (Slots[i].ItemType == ItemType.None)
                 {
+                    CollectedItems[i] = itemType;
                     return Slots[i];
                 }
             }

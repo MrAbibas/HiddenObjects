@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
 using App.Gameplay.Common;
+using App.Gameplay.ItemCollecting;
 using App.Gameplay.Items;
 using App.Gameplay.Levels;
 using TMPro;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace App.UI.HUD
 {
-    public class HUD : MonoBehaviour
+    public class HUD : MonoBehaviour, IInitializable
     {
         [SerializeField] private RectTransform targetItemsContainer;
         [SerializeField] private TargetItemOnUI targetItemOnUIPrefab;
@@ -21,23 +23,40 @@ namespace App.UI.HUD
         private ItemConfigs _itemConfigs;
         private Timer _levelTimer;
         private LevelConfig _levelConfig;
+        private LeftToCollectItemsContainer _leftToCollectItemsContainer;
 
         [Inject]
-        public void Construct(ItemConfigs itemConfigs, Timer levelTimer, LevelConfig levelConfig)
+        public void Construct(ItemConfigs itemConfigs,
+            Timer levelTimer,
+            LevelConfig levelConfig,
+            LeftToCollectItemsContainer leftToCollectItemsContainer)
         {
             _itemConfigs = itemConfigs;
             _levelTimer = levelTimer;
             _levelConfig = levelConfig;
+            _leftToCollectItemsContainer = leftToCollectItemsContainer;
         }
 
-        public void Init(Dictionary<ItemType, int> targetItems)
+        public void Initialize()
         {
-            ShowTargetItems(targetItems);
+            _leftToCollectItemsContainer.UpdateLeftToCollect += UpdateLeftToCollectHandler;
+            ShowTargetItems(_leftToCollectItemsContainer.Items);
 
             lvlText.text = string.Format(lvlFormat, _levelConfig.ID + 1);
 
             _levelTimer.OnTimeUpdated += UpdateTimer;
             UpdateTimer(_levelTimer.TimeLeft);
+        }
+
+        private void UpdateLeftToCollectHandler(ItemType itemType, int countLeft)
+        {
+            if (countLeft > 0)
+                _targetItems[itemType].UpdateCount(countLeft);
+            else
+            {
+                _targetItems[itemType].Hide();
+                _targetItems.Remove(itemType);
+            }
         }
 
         private void ShowTargetItems(Dictionary<ItemType, int> targetItems)

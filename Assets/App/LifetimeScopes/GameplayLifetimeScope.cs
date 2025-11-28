@@ -33,6 +33,7 @@ namespace App.LifetimeScopes
             builder.RegisterInstance(itemsOnField);
             builder.RegisterInstance(itemCollectAnimationConfig);
             builder.Register<CollectedItemsContainer>(Lifetime.Singleton);
+            builder.Register<LeftToCollectItemsContainer>(Lifetime.Singleton);
             builder.Register<ItemCollectAnimator>(Lifetime.Singleton);
             builder.Register<ItemCollector>(Lifetime.Singleton).AsSelf().As<IItemCollector>();
             

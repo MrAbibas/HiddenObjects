@@ -56,7 +56,7 @@ namespace App.Gameplay.ItemCollecting
         public void CollectItem(ItemOnField itemOnField)
         {
             if (CanCollect(itemOnField) == false) return;
-            Debug.Log($"Collecting {itemOnField.Type}");
+
             itemOnField.OnClick.RemoveListener(OnItemClicked);
             _activeItems.Remove(itemOnField);
             itemOnField.gameObject.SetActive(false);
@@ -73,6 +73,7 @@ namespace App.Gameplay.ItemCollecting
             itemOnUI.GetComponent<RectTransform>().anchoredPosition = localPoint;
             slot.SetItem(itemOnUI);
             _collectAnimator.PlayCollectAnimation(itemOnUI, slot, OnCollectAnimationComplete);
+            OnItemCollected?.Invoke(itemOnField);
         }
 
         private void OnCollectAnimationComplete()
