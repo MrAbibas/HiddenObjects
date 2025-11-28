@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using App.Factories;
 using App.Gameplay.Common;
 using App.Gameplay.GameplayFSM;
 using App.Gameplay.GameplayFSM.States;
+using App.Gameplay.ItemCollecting;
+using App.Gameplay.Items;
 using App.Gameplay.Levels;
 using App.UI.CollectedItemsPanel;
 using App.UI.HUD;
@@ -16,6 +19,7 @@ namespace App.LifetimeScopes
         [SerializeField] private LevelConfig testLevel;
         [SerializeField] private HUD hud;
         [SerializeField] private CollectedItemsPanel collectedItemsPanel;
+        [SerializeField] private List<ItemOnField> itemsOnField;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -24,6 +28,9 @@ namespace App.LifetimeScopes
             builder.RegisterEntryPoint<GameplayStateMachine>().AsSelf();
             builder.Register<Timer>(Lifetime.Singleton);
             builder.RegisterInstance(testLevel);
+
+            builder.RegisterInstance(itemsOnField);
+            builder.Register<ItemCollector>(Lifetime.Singleton).AsSelf().As<IItemCollector>();
             
             RegisterUIElements(builder);
         }
