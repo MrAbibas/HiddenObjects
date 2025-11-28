@@ -16,7 +16,7 @@ namespace App.Gameplay.GameplayFSM.States
 
         public void Enter()
         {
-            _lvlTimer.Init(_levelConfig.Time);
+            _lvlTimer.Start(_levelConfig.Time);
         }
 
         public void Update()
