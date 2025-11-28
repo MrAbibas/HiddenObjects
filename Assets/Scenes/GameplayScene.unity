@@ -316,7 +316,7 @@ MonoBehaviour:
     TypeName: App.LifetimeScopes.GameLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
-  itemConfigs: {fileID: 11400000, guid: 23ab21048bbdbd1449c25449c7cc4578, type: 2}
+  testLevel: {fileID: 11400000, guid: a0627fa51bd67394f82be08a263c6a20, type: 2}
 --- !u!4 &398423166
 Transform:
   m_ObjectHideFlags: 0

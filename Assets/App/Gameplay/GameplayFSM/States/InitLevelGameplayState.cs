@@ -1,20 +1,30 @@
-﻿namespace App.Gameplay.GameplayFSM.States
+﻿using App.Gameplay.Common;
+using App.Gameplay.Level;
+
+namespace App.Gameplay.GameplayFSM.States
 {
     public class InitLevelGameplayState : IGameplayState
     {
+        private readonly Timer _lvlTimer;
+        private readonly LevelConfig _levelConfig;
+        
+        public InitLevelGameplayState(Timer lvlTimer, LevelConfig levelConfig)
+        {
+            _lvlTimer = lvlTimer;
+            _levelConfig = levelConfig;
+        }
+
         public void Enter()
         {
-            throw new System.NotImplementedException();
+            _lvlTimer.Init(_levelConfig.Time);
         }
 
         public void Update()
         {
-            throw new System.NotImplementedException();
         }
 
         public void Exit()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

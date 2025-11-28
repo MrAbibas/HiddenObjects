@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c27e7a4cfb9aeaa4485fe89cfeea6709, type: 3}
   m_Name: LevelConfig 0
   m_EditorClassIdentifier: App::App.Gameplay.Level.LevelConfig
+  targetItems:
+    _serializedList: []
   <ID>k__BackingField: 0
-  TargetItems:
-    _serializedList:
-    - Key: 0
-      Value: 0
+  <Time>k__BackingField: 80
+  <BackgroundSprite>k__BackingField: {fileID: 0}
+  <BackgroundScale>k__BackingField: {x: 0, y: 0, z: 0}
   <ItemsOnField>k__BackingField:
   - Type: 0
     Position: {x: 2, y: 0, z: 0}
