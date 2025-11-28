@@ -10,6 +10,7 @@ namespace App.Gameplay.Level
     {
         [field: SerializeField] public SerializedDictionary<ItemType, int> targetItems;
         [field: SerializeField] public int ID {get; private set;}
+        [field: SerializeField] public float Time { get; private set; }
         [field: SerializeField] public Sprite BackgroundSprite {get; private set;}
         [field: SerializeField] public Vector3 BackgroundScale {get; private set;}
         [field: SerializeField] public ItemOnFieldMarker[] ItemsOnField { get; private set; }
