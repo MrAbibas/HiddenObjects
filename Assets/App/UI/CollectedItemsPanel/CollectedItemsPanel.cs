@@ -7,11 +7,11 @@ namespace App.UI.CollectedItemsPanel
     public class CollectedItemsPanel : MonoBehaviour
     {
         [SerializeField] private RectTransform slotsContainer;
-        private List<CollectedItemSlot> _slots;
+        public List<CollectedItemSlot> Slots { get; private set; }
 
         private void Start()
         {
-            _slots = slotsContainer.GetComponentsInChildren<CollectedItemSlot>().ToList();
+            Slots = slotsContainer.GetComponentsInChildren<CollectedItemSlot>().ToList();
         }
     }
 }
