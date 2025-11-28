@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using App.Gameplay.Common;
 using App.Gameplay.Items;
 using TMPro;
 using UnityEngine;
@@ -15,11 +17,13 @@ namespace App.UI.HUD
         [SerializeField] private string timeFormat;
         private Dictionary<ItemType, TargetItemOnUI> _targetItems;
         private ItemConfigs _itemConfigs;
+        private Timer _levelTimer;
 
         [Inject]
-        public void Construct(ItemConfigs itemConfigs)
+        public void Construct(ItemConfigs itemConfigs,  Timer levelTimer)
         {
             _itemConfigs = itemConfigs;
+            _levelTimer = levelTimer;
         }
 
         public void Init(Dictionary<ItemType, int> targetItems)
@@ -31,6 +35,14 @@ namespace App.UI.HUD
                 itemOnUI.Show(_itemConfigs.Configs[targetItem.Key].Sprite, targetItem.Value);
                 _targetItems.Add(targetItem.Key, itemOnUI);
             }
+
+            _levelTimer.OnTimeUpdated += UpdateTimer;
+            UpdateTimer(_levelTimer.TimeLeft);
+        }
+
+        public void UpdateTimer(float time)
+        {
+            timerText.text = string.Format(timeFormat, new TimeSpan(0,0,0,0,(int)(_levelTimer.TimeLeft * 1000)));
         }
     }
 }
