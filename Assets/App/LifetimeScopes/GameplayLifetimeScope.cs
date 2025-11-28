@@ -20,6 +20,7 @@ namespace App.LifetimeScopes
         [SerializeField] private HUD hud;
         [SerializeField] private CollectedItemsPanel collectedItemsPanel;
         [SerializeField] private List<ItemOnField> itemsOnField;
+        [SerializeField] private ItemCollectAnimationConfig itemCollectAnimationConfig;
         
         protected override void Configure(IContainerBuilder builder)
         {
