@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 363642542}
   - component: {fileID: 363642541}
   - component: {fileID: 363642544}
+  - component: {fileID: 363642545}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -261,6 +262,22 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &363642545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363642540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.Physics2DRaycaster
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &398423164
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +314,14 @@ MonoBehaviour:
   testLevel: {fileID: 11400000, guid: a0627fa51bd67394f82be08a263c6a20, type: 2}
   hud: {fileID: 1200600638987315955}
   collectedItemsPanel: {fileID: 840755957546678728}
+  itemsOnField:
+  - {fileID: 502506822677016164}
+  - {fileID: 4780641837250705857}
+  - {fileID: 1587318689912263959}
+  - {fileID: 1174919933310661816}
+  - {fileID: 3278407780881329519}
+  - {fileID: 8665004349599282316}
+  itemCollectAnimationConfig: {fileID: 11400000, guid: c5e86273b8e526b4d98e4ab6adea1b52, type: 2}
 --- !u!4 &398423166
 Transform:
   m_ObjectHideFlags: 0
@@ -557,6 +582,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ff3db9400babe64cb9825f612e5d0f5, type: 3}
+--- !u!114 &502506822677016164 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7447727748327734590, guid: 7ff3db9400babe64cb9825f612e5d0f5, type: 3}
+  m_PrefabInstance: {fileID: 502506822677016163}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57561ccf3506443c9f1c61a2f3ccc344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::App.Gameplay.Items.ItemOnField
 --- !u!1001 &840755957546678727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -898,6 +934,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8fa1c2a63d1dc649a1da44a6588d396, type: 3}
+--- !u!114 &1174919933310661816 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6046225863864865810, guid: f8fa1c2a63d1dc649a1da44a6588d396, type: 3}
+  m_PrefabInstance: {fileID: 1174919933310661815}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57561ccf3506443c9f1c61a2f3ccc344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::App.Gameplay.Items.ItemOnField
 --- !u!1001 &1200600638987315954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1067,6 +1114,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8fa1c2a63d1dc649a1da44a6588d396, type: 3}
+--- !u!114 &1587318689912263959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6046225863864865810, guid: f8fa1c2a63d1dc649a1da44a6588d396, type: 3}
+  m_PrefabInstance: {fileID: 1587318689912263958}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57561ccf3506443c9f1c61a2f3ccc344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::App.Gameplay.Items.ItemOnField
 --- !u!1001 &3278407780881329518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1124,6 +1182,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e1af6dd26e1b6841b32f7b3d4ef8d57, type: 3}
+--- !u!114 &3278407780881329519 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4382720543650464953, guid: 2e1af6dd26e1b6841b32f7b3d4ef8d57, type: 3}
+  m_PrefabInstance: {fileID: 3278407780881329518}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57561ccf3506443c9f1c61a2f3ccc344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::App.Gameplay.Items.ItemOnField
 --- !u!1001 &4780641837250705856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1185,6 +1254,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ff3db9400babe64cb9825f612e5d0f5, type: 3}
+--- !u!114 &4780641837250705857 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7447727748327734590, guid: 7ff3db9400babe64cb9825f612e5d0f5, type: 3}
+  m_PrefabInstance: {fileID: 4780641837250705856}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57561ccf3506443c9f1c61a2f3ccc344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::App.Gameplay.Items.ItemOnField
 --- !u!1001 &8665004349599282315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1195,7 +1275,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4953199990607527494, guid: 2e1af6dd26e1b6841b32f7b3d4ef8d57, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.56806004
+      value: 1.45
       objectReference: {fileID: 0}
     - target: {fileID: 4953199990607527494, guid: 2e1af6dd26e1b6841b32f7b3d4ef8d57, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1242,6 +1322,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e1af6dd26e1b6841b32f7b3d4ef8d57, type: 3}
+--- !u!114 &8665004349599282316 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4382720543650464953, guid: 2e1af6dd26e1b6841b32f7b3d4ef8d57, type: 3}
+  m_PrefabInstance: {fileID: 8665004349599282315}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57561ccf3506443c9f1c61a2f3ccc344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::App.Gameplay.Items.ItemOnField
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -10,9 +10,9 @@ namespace App.Gameplay.Items
         [Serializable]
         public class ItemConfig
         {
-            public Sprite Sprite;
+            public Sprite icon;
+            public ItemOnUI onUIPrefab;
         }
-
-        [field: SerializeField] public SerializedDictionary<ItemType, ItemConfig> Configs;
+        [field: SerializeField] public SerializedDictionary<ItemType, ItemConfig> Configs { get; private set; }
     }
 }

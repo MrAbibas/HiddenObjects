@@ -46,7 +46,7 @@ namespace App.UI.HUD
             foreach (var targetItem in targetItems)
             {
                 var itemOnUI = Instantiate(targetItemOnUIPrefab, targetItemsContainer);
-                itemOnUI.Show(_itemConfigs.Configs[targetItem.Key].Sprite, targetItem.Value);
+                itemOnUI.Show(_itemConfigs.Configs[targetItem.Key].icon, targetItem.Value);
                 _targetItems.Add(targetItem.Key, itemOnUI);
             }
         }
