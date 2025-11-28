@@ -3,21 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using App.Gameplay.Items;
 using App.UI.CollectedItemsPanel;
+using VContainer.Unity;
 
 namespace App.Gameplay.ItemCollecting
 {
-    public class CollectedItemsContainer
+    public class CollectedItemsContainer: IInitializable
     {
-        public ItemType[] CollectedItems { get; private set; }
         private readonly CollectedItemsPanel _collectedItemsPanel;
-
+        
+        public ItemType[] CollectedItems { get; private set; }
         public bool HasEmptySlots => CollectedItems.Any(x => x == ItemType.None);
         private List<CollectedItemSlot> Slots => _collectedItemsPanel.Slots;
         
         public CollectedItemsContainer(CollectedItemsPanel collectedItemsPanel)
         {
             _collectedItemsPanel = collectedItemsPanel;
-            CollectedItems = new ItemType[this._collectedItemsPanel.Slots.Count];
+        }
+        
+        public void Initialize()
+        {
+            CollectedItems = new ItemType[_collectedItemsPanel.Slots.Count];
         }
 
         public CollectedItemSlot GetSlotForItem(ItemType itemType)

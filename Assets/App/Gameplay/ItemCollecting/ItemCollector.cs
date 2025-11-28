@@ -18,11 +18,16 @@ namespace App.Gameplay.ItemCollecting
         
         public bool CollectingEnabled { get; private set; }
 
-        public ItemCollector(List<ItemOnField> activeItems, CollectedItemsContainer collectedItemsContainer)
+        public ItemCollector(List<ItemOnField> activeItems,
+            CollectedItemsContainer collectedItemsContainer,
+            ItemCollectAnimator collectAnimator,
+            ItemConfigs itemConfigs)
         {
             _activeItems = activeItems;
-            _inactiveItems = new();
             _collectedItemsContainer = collectedItemsContainer;
+            _collectAnimator = collectAnimator;
+            _itemConfigs = itemConfigs;
+            _inactiveItems = new();
             _queuedItems = new Queue<ItemOnField>();
         }
 
@@ -52,11 +57,22 @@ namespace App.Gameplay.ItemCollecting
         {
             if (CanCollect(itemOnField) == false) return;
             Debug.Log($"Collecting {itemOnField.Type}");
+            itemOnField.OnClick.RemoveListener(OnItemClicked);
+            _activeItems.Remove(itemOnField);
+            itemOnField.gameObject.SetActive(false);
+            _inactiveItems.Add(itemOnField);
             var slot = _collectedItemsContainer.GetSlotForItem(itemOnField.Type);
-            ItemOnUI itemOnUI =
-                Object.Instantiate(_itemConfigs.Configs[itemOnField.Type].onUIPrefab, slot.Container.transform);
-            itemOnUI.transform.position = itemOnField.transform.position;
-            _collectAnimator.PlayCollectAnimation(itemOnUI, OnCollectAnimationComplete);
+            var prefab = _itemConfigs.Configs[itemOnField.Type].onUIPrefab;
+            ItemOnUI itemOnUI = Object.Instantiate(prefab, slot.Container);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                slot.Container, 
+                Camera.main.WorldToScreenPoint(itemOnField.transform.position),
+                null, 
+                out Vector2 localPoint
+            );
+            itemOnUI.GetComponent<RectTransform>().anchoredPosition = localPoint;
+            slot.SetItem(itemOnUI);
+            _collectAnimator.PlayCollectAnimation(itemOnUI, slot, OnCollectAnimationComplete);
         }
 
         private void OnCollectAnimationComplete()
