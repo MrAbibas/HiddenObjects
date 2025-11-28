@@ -3,6 +3,7 @@ using App.Gameplay.Common;
 using App.Gameplay.GameplayFSM;
 using App.Gameplay.GameplayFSM.States;
 using App.Gameplay.Levels;
+using App.UI.CollectedItemsPanel;
 using App.UI.HUD;
 using UnityEngine;
 using VContainer;
@@ -14,6 +15,7 @@ namespace App.LifetimeScopes
     {
         [SerializeField] private LevelConfig testLevel;
         [SerializeField] private HUD hud;
+        [SerializeField] private CollectedItemsPanel collectedItemsPanel;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -23,7 +25,13 @@ namespace App.LifetimeScopes
             builder.Register<Timer>(Lifetime.Singleton);
             builder.RegisterInstance(testLevel);
             
+            RegisterUIElements(builder);
+        }
+
+        private void RegisterUIElements(IContainerBuilder builder)
+        {
             builder.RegisterComponent(hud);
+            builder.RegisterComponent(collectedItemsPanel);
         }
 
         private void RegisterGameplayStates(IContainerBuilder builder)

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 764268684035548372}
   - component: {fileID: 2613233063438393949}
   - component: {fileID: 9122001531436160333}
+  - component: {fileID: 617955828238681633}
   m_Layer: 5
   m_Name: CollectedItemSlotsCanvas
   m_TagString: Untagged
@@ -102,6 +103,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &617955828238681633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710930814288263756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d652ad6a1d79a6649a62c803abe5e8e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::App.UI.CollectedItemsPanel.CollectedItemsPanel
+  slotsContainer: {fileID: 4627342484641471076}
 --- !u!1 &3279756813870528676
 GameObject:
   m_ObjectHideFlags: 0
