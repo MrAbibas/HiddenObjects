@@ -1,20 +1,24 @@
-﻿namespace App.Gameplay.GameplayFSM.States
+﻿using App.Gameplay.Common;
+using UnityEngine;
+
+namespace App.Gameplay.GameplayFSM.States
 {
     public class MainLoopGameplayState : IGameplayState
     {
+        private readonly Timer _levelTimer;
+        
         public void Enter()
         {
-            throw new System.NotImplementedException();
         }
 
         public void Update()
         {
-            throw new System.NotImplementedException();
+            _levelTimer.Tick(Time.deltaTime);
         }
 
         public void Exit()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

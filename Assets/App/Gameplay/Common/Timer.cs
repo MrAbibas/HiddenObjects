@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using VContainer;
 
 namespace App.Gameplay.Common
@@ -27,6 +28,14 @@ namespace App.Gameplay.Common
         {
             Duration = duration;
             ElapsedTime = 0;
+        }
+
+        public void Tick(float deltaTime)
+        {
+            if(ElapsedTime >= Duration)
+                return;
+            
+            ElapsedTime = Mathf.Clamp(ElapsedTime + deltaTime, 0, Duration);
         }
     }
 }
