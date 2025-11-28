@@ -1,3 +1,4 @@
+using System.Timers;
 using App.Factories;
 using App.Gameplay.GameplayFSM;
 using App.Gameplay.GameplayFSM.States;
@@ -13,6 +14,7 @@ namespace App.LifetimeScopes
             RegisterGameplayStates(builder);
             builder.RegisterEntryPoint<GameplayStateFactory>();
             builder.RegisterEntryPoint<GameplayStateMachine>();
+            builder.Register<Timer>(Lifetime.Singleton);
         }
 
         private void RegisterGameplayStates(IContainerBuilder builder)
