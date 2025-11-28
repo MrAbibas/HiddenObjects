@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: LevelConfig 0
   m_EditorClassIdentifier: App::App.Gameplay.Level.LevelConfig
   targetItems:
-    _serializedList: []
+    _serializedList:
+    - Key: 1
+      Value: 2
+    - Key: 2
+      Value: 3
+    - Key: 3
+      Value: 3
   <ID>k__BackingField: 0
   <Time>k__BackingField: 80
   <BackgroundSprite>k__BackingField: {fileID: 0}
