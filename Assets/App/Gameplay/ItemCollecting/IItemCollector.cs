@@ -9,6 +9,6 @@ namespace App.Gameplay.ItemCollecting
         void EnableCollect();
         void DisableCollect();
         bool CanCollect(ItemOnField item);
-        void CollectItem(ItemOnField item);
+        void CollectItem(ItemOnField itemOnField);
     }
 }

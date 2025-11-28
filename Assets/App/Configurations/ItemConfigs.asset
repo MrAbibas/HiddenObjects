@@ -12,14 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1032cf87ea4a5c81154b187c33aad6, type: 3}
   m_Name: ItemConfigs
   m_EditorClassIdentifier: App::App.Gameplay.Items.ItemConfigs
-  Configs:
+  Icons:
     _serializedList:
     - Key: 1
-      Value:
-        Sprite: {fileID: -8030835215644163416, guid: 6fe0b670804b0fa45b0de3f96905b00d, type: 3}
+      Value: {fileID: -8030835215644163416, guid: 6fe0b670804b0fa45b0de3f96905b00d, type: 3}
     - Key: 2
-      Value:
-        Sprite: {fileID: -4924299300382404788, guid: e87b0fa7957de3e42bb5fe6bf69f8cb1, type: 3}
+      Value: {fileID: -4924299300382404788, guid: e87b0fa7957de3e42bb5fe6bf69f8cb1, type: 3}
     - Key: 3
-      Value:
-        Sprite: {fileID: -284627385986098231, guid: 211f746eacd2c2b4a9857776e6b0b8de, type: 3}
+      Value: {fileID: -284627385986098231, guid: 211f746eacd2c2b4a9857776e6b0b8de, type: 3}
+  OnUIPrefabs:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 0}
+    - Key: 0
+      Value: {fileID: 0}
+    - Key: 0
+      Value: {fileID: 0}
