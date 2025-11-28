@@ -1,9 +1,8 @@
 using App.Gameplay.Items;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace App.Gameplay.Level
+namespace App.Gameplay.Levels
 {
     [CreateAssetMenu(fileName = "LevelConfig", menuName = "Gameplay/LevelConfig")]
     public class LevelConfig : ScriptableObject

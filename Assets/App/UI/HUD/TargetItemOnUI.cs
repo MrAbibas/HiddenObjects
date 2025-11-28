@@ -32,13 +32,13 @@ namespace App.UI.HUD
         public void UpdateCount(int count)
         {
             _countText.text = count.ToString();
-            _countText.rectTransform.DOPunchScale(Vector3.one * showPunchScale, showPunchDuration);
+            _countText.rectTransform.DOPunchScale(Vector3.one * updatePunchScale, updatePunchDuration);
         }
 
         public void Hide()
         {
             _countText.text = "0";
-            _image.rectTransform.DOScale(0.3f, 0.3f).SetEase(Ease.InOutBack);
+            _image.rectTransform.DOScale(Vector3.one * hideEndScale, hideDuration).SetEase(Ease.InOutBack);
             Destroy(gameObject);
         }
     }

@@ -243,12 +243,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: App::TargetItemOnUI
   _image: {fileID: 6894787216167701525}
   _countText: {fileID: 8010396635217249838}
-  showPunchScale: 1.2
-  showPunchDuration: 0.4
-  updatePunchScale: 1.2
-  updatePunchDuration: 0.4
+  showPunchScale: 0.3
+  showPunchDuration: 0.3
+  updatePunchScale: 0.3
+  updatePunchDuration: 0.3
   hideEndScale: 1.2
-  hideDuration: 0.4
+  hideDuration: 0.3
 --- !u!1 &6820540467822394020
 GameObject:
   m_ObjectHideFlags: 0

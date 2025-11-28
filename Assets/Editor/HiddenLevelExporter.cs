@@ -1,5 +1,5 @@
 using App.Gameplay.Items;
-using App.Gameplay.Level;
+using App.Gameplay.Levels;
 using AYellowpaper.SerializedCollections;
 using UnityEditor;
 using UnityEngine;

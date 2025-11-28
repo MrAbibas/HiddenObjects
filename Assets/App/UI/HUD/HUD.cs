@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using App.Gameplay.Common;
 using App.Gameplay.Items;
-using App.Gameplay.Level;
+using App.Gameplay.Levels;
 using TMPro;
 using UnityEngine;
 using VContainer;
@@ -32,6 +32,16 @@ namespace App.UI.HUD
 
         public void Init(Dictionary<ItemType, int> targetItems)
         {
+            ShowTargetItems(targetItems);
+
+            lvlText.text = string.Format(lvlFormat, _levelConfig.ID + 1);
+
+            _levelTimer.OnTimeUpdated += UpdateTimer;
+            UpdateTimer(_levelTimer.TimeLeft);
+        }
+
+        private void ShowTargetItems(Dictionary<ItemType, int> targetItems)
+        {
             _targetItems = new Dictionary<ItemType, TargetItemOnUI>();
             foreach (var targetItem in targetItems)
             {
@@ -39,11 +49,6 @@ namespace App.UI.HUD
                 itemOnUI.Show(_itemConfigs.Configs[targetItem.Key].Sprite, targetItem.Value);
                 _targetItems.Add(targetItem.Key, itemOnUI);
             }
-            
-            lvlText.text = string.Format(lvlFormat, _levelConfig.ID + 1);
-
-            _levelTimer.OnTimeUpdated += UpdateTimer;
-            UpdateTimer(_levelTimer.TimeLeft);
         }
 
         public void UpdateTimer(float time)

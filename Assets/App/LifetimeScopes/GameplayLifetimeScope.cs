@@ -2,7 +2,7 @@ using App.Factories;
 using App.Gameplay.Common;
 using App.Gameplay.GameplayFSM;
 using App.Gameplay.GameplayFSM.States;
-using App.Gameplay.Level;
+using App.Gameplay.Levels;
 using App.UI.HUD;
 using UnityEngine;
 using VContainer;
