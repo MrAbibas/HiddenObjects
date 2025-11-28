@@ -1,8 +1,9 @@
-using System.Timers;
 using App.Factories;
+using App.Gameplay.Common;
 using App.Gameplay.GameplayFSM;
 using App.Gameplay.GameplayFSM.States;
 using App.Gameplay.Level;
+using App.UI.HUD;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -11,15 +12,18 @@ namespace App.LifetimeScopes
 {
     public class GameplayLifetimeScope : LifetimeScope
     {
-        [SerializeField] private LevelConfig testLevel; 
+        [SerializeField] private LevelConfig testLevel;
+        [SerializeField] private HUD hud;
         
         protected override void Configure(IContainerBuilder builder)
         {
             RegisterGameplayStates(builder);
             builder.RegisterEntryPoint<GameplayStateFactory>();
-            builder.RegisterEntryPoint<GameplayStateMachine>();
+            builder.RegisterEntryPoint<GameplayStateMachine>().AsSelf();
             builder.Register<Timer>(Lifetime.Singleton);
             builder.RegisterInstance(testLevel);
+            
+            builder.RegisterComponent(hud);
         }
 
         private void RegisterGameplayStates(IContainerBuilder builder)

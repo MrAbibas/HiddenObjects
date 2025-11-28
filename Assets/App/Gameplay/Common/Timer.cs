@@ -33,8 +33,12 @@ namespace App.Gameplay.Common
             if(_timerCompleted) return;
             
             ElapsedTime = Mathf.Clamp(ElapsedTime + deltaTime, 0, Duration);
-            if(ElapsedTime >= Duration)
+            OnTimeUpdated?.Invoke(ElapsedTime);
+            if (ElapsedTime >= Duration)
+            {
                 _timerCompleted = true;
+                OnTimerCompleted?.Invoke();
+            }
         }
     }
 }

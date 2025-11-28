@@ -434,8 +434,9 @@ MonoBehaviour:
   targetItemsContainer: {fileID: 3150225162917428595}
   targetItemOnUIPrefab: {fileID: -4213771351878673933, guid: b5ee8f9865341984db6465982685f7b2, type: 3}
   lvlText: {fileID: 6829724943544436543}
+  lvlFormat: '{0}'
   timerText: {fileID: 8078688106871273860}
-  timeFormat: mm:ss
+  timeFormat: mm\:ss
 --- !u!1 &7641720553641266337
 GameObject:
   m_ObjectHideFlags: 0

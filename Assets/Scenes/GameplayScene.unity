@@ -301,6 +301,7 @@ MonoBehaviour:
   autoInjectGameObjects:
   - {fileID: 26102949}
   testLevel: {fileID: 11400000, guid: a0627fa51bd67394f82be08a263c6a20, type: 2}
+  hud: {fileID: 1200600638987315955}
 --- !u!4 &398423166
 Transform:
   m_ObjectHideFlags: 0
@@ -715,6 +716,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a9603244f5fe69459545f56ccb3417b, type: 3}
+--- !u!114 &1200600638987315955 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1122933877691433236, guid: 9a9603244f5fe69459545f56ccb3417b, type: 3}
+  m_PrefabInstance: {fileID: 1200600638987315954}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26102949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86e951f35fe5a9241a80bbca6623f419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: App::HUD
 --- !u!1001 &1587318689912263958
 PrefabInstance:
   m_ObjectHideFlags: 0
