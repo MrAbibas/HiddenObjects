@@ -7,36 +7,54 @@ using VContainer.Unity;
 
 namespace App.Gameplay.ItemCollecting
 {
-    public class CollectedItemsContainer: IInitializable
+    public class CollectedItemsContainer
     {
         private readonly CollectedItemsPanel _collectedItemsPanel;
-        
-        public ItemType[] CollectedItems { get; private set; }
-        public bool HasEmptySlots => CollectedItems.Any(x => x == ItemType.None);
+        private readonly CollectedItemsContainerAnimator _animator;
+        public bool HasEmptySlots => Slots.Any(x => x.ItemType == ItemType.None);
         private List<CollectedItemSlot> Slots => _collectedItemsPanel.Slots;
         
-        public CollectedItemsContainer(CollectedItemsPanel collectedItemsPanel)
+        public CollectedItemsContainer(CollectedItemsPanel collectedItemsPanel,  CollectedItemsContainerAnimator animator)
         {
             _collectedItemsPanel = collectedItemsPanel;
-        }
-        
-        public void Initialize()
-        {
-            CollectedItems = new ItemType[_collectedItemsPanel.Slots.Count];
+            _animator = animator;
         }
 
         public CollectedItemSlot GetSlotForItem(ItemType itemType)
         {
-            for (int i = 0; i < CollectedItems.Length; i++)
+            bool typeExists = false;
+            for (int i = 0; i < Slots.Count; i++)
             {
                 if (Slots[i].ItemType == ItemType.None)
+                    return Slots[i];
+
+                if (i == Slots.Count - 1) break;
+                if (Slots[i].ItemType == itemType)
                 {
-                    CollectedItems[i] = itemType;
+                    typeExists = true;
+                    continue;
+                }
+
+                if (typeExists && Slots[i].ItemType != itemType)
+                {
+                    ShiftItemsToRightSlot(i);
+                    Slots[i].ClearItem();
                     return Slots[i];
                 }
             }
 
             return null;
+        }
+
+        private void ShiftItemsToRightSlot(int i)
+        {
+            for (int j = Slots.Count - 1; j > i; j--)
+            {
+                if(Slots[j - 1].ItemType == ItemType.None) continue;
+                Slots[j].SetItem(Slots[j - 1].Item);
+                Slots[j].Item.transform.SetParent(Slots[j].Container, true);
+                _animator.MoveItemToSlotAnimation(Slots[j]);
+            }
         }
     }
 }

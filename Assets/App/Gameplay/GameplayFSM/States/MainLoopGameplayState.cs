@@ -39,7 +39,6 @@ namespace App.Gameplay.GameplayFSM.States
             _itemCollector.Initialize();
             _itemCollector.EnableCollect();
             _collectedItemsPanel.Initialize();
-            _collectedItemsContainer.Initialize();
             _leftToCollectItemsContainer.Initialize();
             _hud.Initialize();
         }
