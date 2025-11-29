@@ -67,14 +67,17 @@ namespace App.Gameplay.ItemCollecting
             _inactiveItems.Add(itemOnField);
             var slot = _collectedItemsContainer.GetSlotForItem(itemOnField.Type);
             var prefab = _itemConfigs.Configs[itemOnField.Type].onUIPrefab;
-            ItemOnUI itemOnUI = Object.Instantiate(prefab, slot.Container);
+            ItemOnUI itemOnUI = Object.Instantiate(prefab, _collectedItemsContainer.ItemsContainer);
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                slot.Container, 
+                _collectedItemsContainer.ItemsContainer, 
                 Camera.main.WorldToScreenPoint(itemOnField.transform.position),
                 null, 
                 out Vector2 localPoint
             );
-            itemOnUI.GetComponent<RectTransform>().anchoredPosition = localPoint;
+            RectTransform rectTransform = itemOnUI.transform as RectTransform;
+            rectTransform.anchoredPosition = localPoint;
+            rectTransform.anchorMin = Vector2.up;
+            rectTransform.anchorMax = Vector2.up;
             slot.SetItem(itemOnUI);
             _collectAnimator.PlayCollectAnimation(itemOnUI, slot, OnCollectAnimationCompleteHandler);
             OnItemCollected?.Invoke(itemOnField);

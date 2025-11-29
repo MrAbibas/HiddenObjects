@@ -25,7 +25,7 @@ namespace App.Gameplay.ItemCollecting
             if (slot.ItemType == ItemType.None) return;
             RectTransform rectTransform = slot.Item.transform as RectTransform;
             Tween tween = rectTransform
-                .DOAnchorPos(Vector2.zero, _animationsConfig.MoveToSlotDuration)
+                .DOAnchorPos(slot.AnchorPos, _animationsConfig.MoveToSlotDuration)
                 .SetEase(_animationsConfig.MoveToSlotEase);
             if (_collectAnimator.IsAnimationPlaying && _collectAnimator.CurrentItem == slot.Item)
                 _collectAnimator.AddTweenAfterCollect(tween);
@@ -74,7 +74,7 @@ namespace App.Gameplay.ItemCollecting
             items.Add(centerItem);
             rectTransform = centerSlot.Item.transform as RectTransform;
             seq.Append(rectTransform
-                    .DOJumpAnchorPos(_animationsConfig.MergeCenterItemJumpOffset,
+                    .DOJumpAnchorPos(_animationsConfig.MergeCenterItemJumpOffset + centerSlot.AnchorPos,
                         _animationsConfig.MergeCenterItemJumpPower,
                         _animationsConfig.MergeCenterItemNumJumps,
                         _animationsConfig.MergeCenterItemJumpDuration)

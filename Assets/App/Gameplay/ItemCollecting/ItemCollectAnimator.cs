@@ -37,7 +37,7 @@ namespace App.Gameplay.ItemCollecting
                 .DOPunchScale(_animationConfig.JumpPunch, _animationConfig.JumpPunchDuration, _animationConfig.JumpPunchElasticity))
                 .SetEase(_animationConfig.JumpPunchEase);
 
-            _animationSequence.Append(rectTransform.DOAnchorPos(Vector2.zero, _animationConfig.MoveDuration).SetEase(_animationConfig.MoveEase));
+            _animationSequence.Append(rectTransform.DOAnchorPos(slot.AnchorPos, _animationConfig.MoveDuration).SetEase(_animationConfig.MoveEase));
             Vector2 targetSize = slot.Container.rect.size;
             _animationSequence.Join(rectTransform.DOSizeDelta(targetSize, _animationConfig.MoveDuration)
                 .SetEase(_animationConfig.SizeEase));

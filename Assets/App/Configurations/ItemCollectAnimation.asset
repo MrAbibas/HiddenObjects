@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: ItemCollectAnimation
   m_EditorClassIdentifier: App::App.Gameplay.ItemCollecting.ItemCollectAnimationConfig
   <JumpOffset>k__BackingField: {x: 100, y: -50}
-  <JumpDuration>k__BackingField: 0.6
+  <JumpDuration>k__BackingField: 0.4
   <JumpPower>k__BackingField: 250
   <NumJumps>k__BackingField: 1
   <JumpEase>k__BackingField: 0
   <JumpPunch>k__BackingField: {x: 0.2, y: 0.2, z: 0.2}
-  <JumpPunchDuration>k__BackingField: 0.5
+  <JumpPunchDuration>k__BackingField: 0.3
   <JumpPunchElasticity>k__BackingField: 1
   <JumpPunchEase>k__BackingField: 9
-  <MoveDuration>k__BackingField: 0.5
+  <MoveDuration>k__BackingField: 0.3
   <MoveEase>k__BackingField: 0
   <SizeEase>k__BackingField: 8
   <Punch>k__BackingField: {x: 0.5, y: 0.5, z: 0.5}
