@@ -27,8 +27,8 @@ namespace App.Gameplay.ItemCollecting
             Tween tween = rectTransform
                 .DOAnchorPos(slot.AnchorPos, _animationsConfig.MoveToSlotDuration)
                 .SetEase(_animationsConfig.MoveToSlotEase);
-            if (_collectAnimator.IsAnimationPlaying && _collectAnimator.CurrentItem == slot.Item)
-                _collectAnimator.AddTweenAfterCollect(tween);
+            if (_collectAnimator.ItemIsMovingToSlot(slot.Item))
+                _collectAnimator.ChangeMoveTweenForItem(slot.Item , slot.AnchorPos);
             else
                 tween.Play();
             

@@ -49,12 +49,9 @@ namespace App.Gameplay.ItemCollecting
             if (CollectingEnabled == false) return;
             if (CanCollect(itemOnField) == false) return;
 
-            if(_queuedItems.Contains(itemOnField)) return;
-            
-            if (_collectAnimator.IsAnimationPlaying || _queuedItems.Count > 0)
-                _queuedItems.Enqueue(itemOnField);
-            else
-                CollectItem(itemOnField);
+            if (_queuedItems.Contains(itemOnField)) return;
+
+            CollectItem(itemOnField);
         }
 
         public void CollectItem(ItemOnField itemOnField)

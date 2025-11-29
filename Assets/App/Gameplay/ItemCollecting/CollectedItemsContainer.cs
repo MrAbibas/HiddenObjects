@@ -52,7 +52,6 @@ namespace App.Gameplay.ItemCollecting
             {
                 if(Slots[j - 1].ItemType == ItemType.None) continue;
                 Slots[j].SetItem(Slots[j - 1].Item);
-                Slots[j].Item.transform.SetParent(_collectedItemsPanel.ItemsContainer, true);
                 _animator.MoveItemToSlotAnimation(Slots[j]);
             }
         }
@@ -77,7 +76,6 @@ namespace App.Gameplay.ItemCollecting
                 if (Slots[i].ItemType != ItemType.None && emptyInd != -1)
                 {
                     Slots[emptyInd].SetItem(Slots[i].Item);
-                    Slots[emptyInd].Item.transform.SetParent(_collectedItemsPanel.ItemsContainer, true);
                     Slots[i].ClearItem();
                     _animator.MoveItemToSlotAnimation(Slots[emptyInd]);
                     i = emptyInd;
