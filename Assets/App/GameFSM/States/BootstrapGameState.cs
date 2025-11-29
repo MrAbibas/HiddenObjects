@@ -15,7 +15,9 @@ namespace App.GameFSM.States
 
         public void Enter()
         {
-             _loadSceneOperation = SceneManager.LoadSceneAsync("GameplayScene");
+            _stateMachine.GameplaySceneLoaded = false;
+            _stateMachine.RestartInvoked = false;
+            _loadSceneOperation = SceneManager.LoadSceneAsync("GameplayScene");
         }
 
         public void Update()

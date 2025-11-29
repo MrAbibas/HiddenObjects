@@ -1,4 +1,5 @@
-﻿using App.Gameplay.ItemCollecting;
+﻿using App.Gameplay.Common;
+using App.Gameplay.ItemCollecting;
 using App.Gameplay.Items;
 
 namespace App.Gameplay.Levels
@@ -10,26 +11,40 @@ namespace App.Gameplay.Levels
         private readonly LeftToCollectItemsContainer _leftToCollectItemsContainer;
         private readonly SlotMerger _slotMerger;
         private readonly CollectedItemsContainer _collectedItemsContainer;
+        private readonly Timer _levelTimer;
 
-        public LevelResultChecker(LeftToCollectItemsContainer leftToCollectItemsContainer, SlotMerger slotMerger, CollectedItemsContainer collectedItemsContainer)
+        public LevelResultChecker(LeftToCollectItemsContainer leftToCollectItemsContainer,
+            SlotMerger slotMerger,
+            CollectedItemsContainer collectedItemsContainer,
+            Timer levelTimer)
         {
             _leftToCollectItemsContainer = leftToCollectItemsContainer;
             _slotMerger = slotMerger;
             _collectedItemsContainer = collectedItemsContainer;
+            _levelTimer = levelTimer;
         }
 
         public void Initialize()
         {
             _leftToCollectItemsContainer.UpdateLeftToCollect += UpdateLeftToCollectHandler;
             _slotMerger.OnSlotMergerHandleCollectedItem += OnSlotMergerHandleCollectedItemHandler;
+            _levelTimer.OnTimerCompleted += OnTimerCompletedHandler;
             _levelWin = false;
             _levelLose = false;
+        }
+
+        private void OnTimerCompletedHandler()
+        {
+            _levelLose = true;
         }
 
         private void OnSlotMergerHandleCollectedItemHandler(bool isMerged)
         {
             if (isMerged) return;
-            if (_collectedItemsContainer.HasEmptySlots == false) _levelLose = true;
+            if (_collectedItemsContainer.HasEmptySlots) return;
+            if (_slotMerger.MergeAvailable()) return;
+            
+            _levelLose = true;
         }
 
         private void UpdateLeftToCollectHandler(ItemType itemType, int count)
