@@ -9,11 +9,12 @@ namespace App.Gameplay.ItemCollecting
 {
     public class ItemCollectAnimator
     {
-        private readonly ItemCollectAnimationConfig _animationConfig;
         private Sequence _animationSequence;
+        private readonly ItemCollectAnimationConfig _animationConfig;
         private readonly CollectedItemsContainer _collectedItemsContainer;
         public bool IsAnimationPlaying => _animationSequence?.IsPlaying() ?? false;
-        
+        public ItemOnUI CurrentItem { get; private set; }
+
         public ItemCollectAnimator(ItemCollectAnimationConfig animationConfig)
         {
             _animationConfig = animationConfig;
@@ -22,6 +23,7 @@ namespace App.Gameplay.ItemCollecting
         public void PlayCollectAnimation(ItemOnUI itemOnUI, CollectedItemSlot slot, Action onComplete)
         {
             _animationSequence = DOTween.Sequence();
+            CurrentItem = itemOnUI;
             RectTransform rectTransform = itemOnUI.transform as RectTransform;
             Vector2 targetJumpPos = rectTransform.anchoredPosition + new Vector2(
                 _animationConfig.JumpOffset.x * -1 * Mathf.Sign(rectTransform.anchoredPosition.x),
@@ -45,8 +47,20 @@ namespace App.Gameplay.ItemCollecting
                 .DOPunchScale(_animationConfig.Punch, _animationConfig.PunchDuration, _animationConfig.Elasticity))
                 .SetEase(_animationConfig.PunchEase);
             
-            _animationSequence.OnComplete(() => onComplete?.Invoke());
+            _animationSequence.OnComplete(() =>
+            {
+                onComplete?.Invoke();
+                CurrentItem = null;
+            });
             _animationSequence.Play();
+        }
+
+        public void AddTweenAfterCollect(Tween tween)
+        {
+            Sequence sequence = _animationSequence;
+            _animationSequence = DOTween.Sequence();
+            _animationSequence.Append(sequence);
+            _animationSequence.Append(tween);
         }
     }
 }

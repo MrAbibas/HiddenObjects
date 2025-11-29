@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using App.Gameplay.Items;
 using App.UI.CollectedItemsPanel;
-using VContainer.Unity;
+using UnityEngine;
 
 namespace App.Gameplay.ItemCollecting
 {
@@ -12,7 +11,7 @@ namespace App.Gameplay.ItemCollecting
         private readonly CollectedItemsPanel _collectedItemsPanel;
         private readonly CollectedItemsContainerAnimator _animator;
         public bool HasEmptySlots => Slots.Any(x => x.ItemType == ItemType.None);
-        private List<CollectedItemSlot> Slots => _collectedItemsPanel.Slots;
+        public List<CollectedItemSlot> Slots => _collectedItemsPanel.Slots;
         
         public CollectedItemsContainer(CollectedItemsPanel collectedItemsPanel,  CollectedItemsContainerAnimator animator)
         {
@@ -54,6 +53,35 @@ namespace App.Gameplay.ItemCollecting
                 Slots[j].SetItem(Slots[j - 1].Item);
                 Slots[j].Item.transform.SetParent(Slots[j].Container, true);
                 _animator.MoveItemToSlotAnimation(Slots[j]);
+            }
+        }
+
+        public void RemoveItems(List<ItemOnUI> items)
+        {
+            foreach (var item in items)
+            {
+                var slot = Slots.FirstOrDefault(x => x.ItemType == item.Type);
+                Object.Destroy(item.gameObject);
+                slot?.ClearItem();
+            }
+
+            int emptyInd = -1;
+            for (int i = 0; i < Slots.Count; i++)
+            {
+                if (Slots[i].ItemType == ItemType.None)
+                {
+                    if (emptyInd == -1) emptyInd = i;
+                    continue;
+                }
+                if (Slots[i].ItemType != ItemType.None && emptyInd != -1)
+                {
+                    Slots[emptyInd].SetItem(Slots[i].Item);
+                    Slots[emptyInd].Item.transform.SetParent(Slots[emptyInd].Container, true);
+                    Slots[i].ClearItem();
+                    _animator.MoveItemToSlotAnimation(Slots[emptyInd]);
+                    i = emptyInd;
+                    emptyInd = -1;
+                }
             }
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using App.Gameplay.Items;
+using App.UI.CollectedItemsPanel;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -9,6 +10,7 @@ namespace App.Gameplay.ItemCollecting
     public class ItemCollector: IItemCollector
     {
         public event Action<ItemOnField> OnItemCollected;
+        public event Action OnCollectAnimationComplete;
         private readonly List<ItemOnField> _activeItems;
         private readonly List<ItemOnField> _inactiveItems;
         private readonly CollectedItemsContainer _collectedItemsContainer;
@@ -47,6 +49,8 @@ namespace App.Gameplay.ItemCollecting
             if (CollectingEnabled == false) return;
             if (CanCollect(itemOnField) == false) return;
 
+            if(_queuedItems.Contains(itemOnField)) return;
+            
             if (_collectAnimator.IsAnimationPlaying || _queuedItems.Count > 0)
                 _queuedItems.Enqueue(itemOnField);
             else
@@ -72,12 +76,13 @@ namespace App.Gameplay.ItemCollecting
             );
             itemOnUI.GetComponent<RectTransform>().anchoredPosition = localPoint;
             slot.SetItem(itemOnUI);
-            _collectAnimator.PlayCollectAnimation(itemOnUI, slot, OnCollectAnimationComplete);
+            _collectAnimator.PlayCollectAnimation(itemOnUI, slot, OnCollectAnimationCompleteHandler);
             OnItemCollected?.Invoke(itemOnField);
         }
 
-        private void OnCollectAnimationComplete()
+        private void OnCollectAnimationCompleteHandler()
         {
+            OnCollectAnimationComplete?.Invoke();
             if (_queuedItems.Count > 0)
                 CollectItem(_queuedItems.Dequeue());
         }

@@ -74,5 +74,10 @@ namespace App.UI.HUD
         {
             timerText.text = new TimeSpan(0, 0, 0, 0, (int)(_levelTimer.TimeLeft * 1000)).ToString(timeFormat);
         }
+
+        private void OnDestroy()
+        {
+            _leftToCollectItemsContainer.UpdateLeftToCollect -= UpdateLeftToCollectHandler;
+        }
     }
 }

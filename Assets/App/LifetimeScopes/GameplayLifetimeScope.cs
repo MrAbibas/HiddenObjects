@@ -42,6 +42,8 @@ namespace App.LifetimeScopes
             builder.Register<ItemCollector>(Lifetime.Singleton).AsSelf().As<IItemCollector>();
             builder.Register<ItemCollectAnimator>(Lifetime.Singleton);
             builder.RegisterInstance(itemCollectAnimationConfig);
+
+            builder.Register<SlotMerger>(Lifetime.Singleton);
             
             RegisterUIElements(builder);
         }
