@@ -1,42 +1,87 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using App.Gameplay.Items;
 using App.UI.CollectedItemsPanel;
-using VContainer.Unity;
+using UnityEngine;
 
 namespace App.Gameplay.ItemCollecting
 {
-    public class CollectedItemsContainer: IInitializable
+    public class CollectedItemsContainer
     {
         private readonly CollectedItemsPanel _collectedItemsPanel;
+        private readonly CollectedItemsContainerAnimator _animator;
+        public bool HasEmptySlots => Slots.Any(x => x.ItemType == ItemType.None);
+        public List<CollectedItemSlot> Slots => _collectedItemsPanel.Slots;
+        public RectTransform ItemsContainer => _collectedItemsPanel.ItemsContainer;
         
-        public ItemType[] CollectedItems { get; private set; }
-        public bool HasEmptySlots => CollectedItems.Any(x => x == ItemType.None);
-        private List<CollectedItemSlot> Slots => _collectedItemsPanel.Slots;
-        
-        public CollectedItemsContainer(CollectedItemsPanel collectedItemsPanel)
+        public CollectedItemsContainer(CollectedItemsPanel collectedItemsPanel,  CollectedItemsContainerAnimator animator)
         {
             _collectedItemsPanel = collectedItemsPanel;
-        }
-        
-        public void Initialize()
-        {
-            CollectedItems = new ItemType[_collectedItemsPanel.Slots.Count];
+            _animator = animator;
         }
 
         public CollectedItemSlot GetSlotForItem(ItemType itemType)
         {
-            for (int i = 0; i < CollectedItems.Length; i++)
+            bool typeExists = false;
+            for (int i = 0; i < Slots.Count; i++)
             {
                 if (Slots[i].ItemType == ItemType.None)
+                    return Slots[i];
+
+                if (i == Slots.Count - 1) break;
+                if (Slots[i].ItemType == itemType)
                 {
-                    CollectedItems[i] = itemType;
+                    typeExists = true;
+                    continue;
+                }
+
+                if (typeExists && Slots[i].ItemType != itemType)
+                {
+                    ShiftItemsToRightSlot(i);
+                    Slots[i].ClearItem();
                     return Slots[i];
                 }
             }
 
             return null;
+        }
+
+        private void ShiftItemsToRightSlot(int i)
+        {
+            for (int j = Slots.Count - 1; j > i; j--)
+            {
+                if(Slots[j - 1].ItemType == ItemType.None) continue;
+                Slots[j].SetItem(Slots[j - 1].Item);
+                _animator.MoveItemToSlotAnimation(Slots[j]);
+            }
+        }
+
+        public void RemoveItems(List<ItemOnUI> items)
+        {
+            foreach (var item in items)
+            {
+                var slot = Slots.FirstOrDefault(x => x.ItemType == item.Type);
+                Object.Destroy(item.gameObject);
+                slot?.ClearItem();
+            }
+
+            int emptyInd = -1;
+            for (int i = 0; i < Slots.Count; i++)
+            {
+                if (Slots[i].ItemType == ItemType.None)
+                {
+                    if (emptyInd == -1) emptyInd = i;
+                    continue;
+                }
+                if (Slots[i].ItemType != ItemType.None && emptyInd != -1)
+                {
+                    Slots[emptyInd].SetItem(Slots[i].Item);
+                    Slots[i].ClearItem();
+                    _animator.MoveItemToSlotAnimation(Slots[emptyInd]);
+                    i = emptyInd;
+                    emptyInd = -1;
+                }
+            }
         }
     }
 }

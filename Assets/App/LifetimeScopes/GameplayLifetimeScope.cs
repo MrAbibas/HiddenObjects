@@ -21,6 +21,7 @@ namespace App.LifetimeScopes
         [SerializeField] private CollectedItemsPanel collectedItemsPanel;
         [SerializeField] private List<ItemOnField> itemsOnField;
         [SerializeField] private ItemCollectAnimationConfig itemCollectAnimationConfig;
+        [SerializeField] private CollectedItemsAnimationsConfig collectedItemsAnimationsConfig;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -31,11 +32,18 @@ namespace App.LifetimeScopes
             builder.RegisterInstance(testLevel);
 
             builder.RegisterInstance(itemsOnField);
-            builder.RegisterInstance(itemCollectAnimationConfig);
+            
             builder.Register<CollectedItemsContainer>(Lifetime.Singleton);
+            builder.Register<CollectedItemsContainerAnimator>(Lifetime.Singleton);
+            builder.RegisterInstance(collectedItemsAnimationsConfig);
+            
             builder.Register<LeftToCollectItemsContainer>(Lifetime.Singleton);
-            builder.Register<ItemCollectAnimator>(Lifetime.Singleton);
+            
             builder.Register<ItemCollector>(Lifetime.Singleton).AsSelf().As<IItemCollector>();
+            builder.Register<ItemCollectAnimator>(Lifetime.Singleton);
+            builder.RegisterInstance(itemCollectAnimationConfig);
+
+            builder.Register<SlotMerger>(Lifetime.Singleton);
             
             RegisterUIElements(builder);
         }
