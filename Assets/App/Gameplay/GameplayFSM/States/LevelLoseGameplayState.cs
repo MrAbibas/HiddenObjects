@@ -1,20 +1,20 @@
-﻿namespace App.Gameplay.GameplayFSM.States
+﻿using UnityEngine;
+
+namespace App.Gameplay.GameplayFSM.States
 {
     public class LevelLoseGameplayState : IGameplayState
     {
         public void Enter()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Entered LevelLoseGameplayState");
         }
 
         public void Update()
         {
-            throw new System.NotImplementedException();
         }
 
         public void Exit()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

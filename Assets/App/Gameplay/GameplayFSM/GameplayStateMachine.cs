@@ -1,5 +1,6 @@
 using App.Core.FSM;
 using App.Gameplay.GameplayFSM.States;
+using App.Gameplay.Levels;
 using VContainer.Unity;
 
 namespace App.Gameplay.GameplayFSM
@@ -8,10 +9,12 @@ namespace App.Gameplay.GameplayFSM
     {
         public bool LvlInitialized { get; set; } = false;
         private readonly IStateFactory<IGameplayState> _stateFactory;
+        private readonly ILevelResultChecker _levelResultChecker;
 
-        public GameplayStateMachine(IStateFactory<IGameplayState> stateFactory)
+        public GameplayStateMachine(IStateFactory<IGameplayState> stateFactory, ILevelResultChecker levelResultChecker)
         {
             _stateFactory = stateFactory;
+            _levelResultChecker = levelResultChecker;
         }
 
         public void Initialize()
@@ -22,6 +25,8 @@ namespace App.Gameplay.GameplayFSM
             var levelWinState = _stateFactory.Create<LevelWinGameplayState>();
             
             AddTransition(initLvlState, mainLoopState, new FuncPredicate(() => LvlInitialized));
+            AddTransition(mainLoopState, levelLoseState, new FuncPredicate(_levelResultChecker.LevelLose));
+            AddTransition(mainLoopState, levelWinState, new FuncPredicate(_levelResultChecker.LevelWin));
             SetState(initLvlState);
         }
 
