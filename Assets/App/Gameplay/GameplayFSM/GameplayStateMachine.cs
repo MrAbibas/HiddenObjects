@@ -8,6 +8,7 @@ namespace App.Gameplay.GameplayFSM
     public class GameplayStateMachine : StateMachine, IInitializable, ITickable
     {
         public bool LvlInitialized { get; set; } = false;
+
         private readonly IStateFactory<IGameplayState> _stateFactory;
         private readonly ILevelResultChecker _levelResultChecker;
 
@@ -27,6 +28,7 @@ namespace App.Gameplay.GameplayFSM
             AddTransition(initLvlState, mainLoopState, new FuncPredicate(() => LvlInitialized));
             AddTransition(mainLoopState, levelLoseState, new FuncPredicate(_levelResultChecker.LevelLose));
             AddTransition(mainLoopState, levelWinState, new FuncPredicate(_levelResultChecker.LevelWin));
+            
             SetState(initLvlState);
         }
 

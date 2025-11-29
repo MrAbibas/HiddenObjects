@@ -62,6 +62,28 @@ namespace App.Gameplay.ItemCollecting
             OnSlotMergerHandleCollectedItem?.Invoke(false);
         }
 
+        public bool MergeAvailable()
+        {
+            ItemType itemType = ItemType.None;
+            int duplicates = 0;
+            for (int i = 0; i < _collectedItemsContainer.Slots.Count; i++)
+            {
+                var slot = _collectedItemsContainer.Slots[i];
+                if (slot.ItemType != itemType)
+                {
+                    itemType = slot.ItemType;
+                    duplicates = 1;
+                }
+                else
+                {
+                    duplicates++;
+                    if (duplicates >=  MERGE_COUNT) return true;
+                }
+            }
+
+            return false;
+        }
+        
         private bool TryMergeSlots(List<CollectedItemSlot> slots)
         {
             if (slots.Count >= MERGE_COUNT)

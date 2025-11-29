@@ -29,7 +29,10 @@ namespace App.Gameplay.Levels
         private void OnSlotMergerHandleCollectedItemHandler(bool isMerged)
         {
             if (isMerged) return;
-            if (_collectedItemsContainer.HasEmptySlots == false) _levelLose = true;
+            if (_collectedItemsContainer.HasEmptySlots) return;
+            if (_slotMerger.MergeAvailable()) return;
+            
+            _levelLose = true;
         }
 
         private void UpdateLeftToCollectHandler(ItemType itemType, int count)

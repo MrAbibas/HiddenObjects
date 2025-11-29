@@ -1,12 +1,28 @@
-﻿using UnityEngine;
+﻿using App.GameFSM;
+using App.UI.LevelResult;
 
 namespace App.Gameplay.GameplayFSM.States
 {
     public class LevelLoseGameplayState : IGameplayState
     {
+        private readonly LevelResultPanel _levelResultPanel;
+        private readonly GameStateMachine _gameplayStateMachine;
+
+        public LevelLoseGameplayState(LevelResultPanel levelResultPanel, GameStateMachine gameplayStateMachine)
+        {
+            _levelResultPanel = levelResultPanel;
+            _gameplayStateMachine = gameplayStateMachine;
+        }
+
         public void Enter()
         {
-            Debug.Log("Entered LevelLoseGameplayState");
+            _levelResultPanel.ShowLose();
+            _levelResultPanel.OnRestartClicked.AddListener(OnRestartClickedHandler);
+        }
+
+        private void OnRestartClickedHandler()
+        {
+            _gameplayStateMachine.RestartInvoked = true;
         }
 
         public void Update()
@@ -15,6 +31,8 @@ namespace App.Gameplay.GameplayFSM.States
 
         public void Exit()
         {
+            _levelResultPanel.Hide();
+            _levelResultPanel.OnRestartClicked.RemoveListener(OnRestartClickedHandler);
         }
     }
 }

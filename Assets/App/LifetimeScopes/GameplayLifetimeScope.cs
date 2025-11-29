@@ -9,6 +9,7 @@ using App.Gameplay.Items;
 using App.Gameplay.Levels;
 using App.UI.CollectedItemsPanel;
 using App.UI.HUD;
+using App.UI.LevelResult;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -20,6 +21,7 @@ namespace App.LifetimeScopes
         [SerializeField] private LevelConfig testLevel;
         [SerializeField] private HUD hud;
         [SerializeField] private CollectedItemsPanel collectedItemsPanel;
+        [SerializeField] private LevelResultPanel levelResultPanel;
         [SerializeField] private List<ItemOnField> itemsOnField;
         [SerializeField] private ItemCollectAnimationConfig itemCollectAnimationConfig;
         [SerializeField] private CollectedItemsAnimationsConfig collectedItemsAnimationsConfig;
@@ -59,6 +61,7 @@ namespace App.LifetimeScopes
         {
             builder.RegisterComponent(hud);
             builder.RegisterComponent(collectedItemsPanel);
+            builder.RegisterComponent(levelResultPanel);
         }
 
         private void RegisterGameplayStates(IContainerBuilder builder)

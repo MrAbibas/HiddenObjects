@@ -7,8 +7,9 @@ namespace App.GameFSM
 {
     public class GameStateMachine : StateMachine, IInitializable, ITickable
     {
-        public bool GameplaySceneLoaded { get; set; } = false;
         private readonly IStateFactory<IGameState> _stateFactory;
+        public bool GameplaySceneLoaded { get; set; } = false;
+        public bool RestartInvoked { get; set; } = false;
 
         public GameStateMachine(IStateFactory<IGameState> stateFactory)
         {
@@ -20,6 +21,7 @@ namespace App.GameFSM
             var bootstrapState = _stateFactory.Create<BootstrapGameState>();
             var gameplayState = _stateFactory.Create<GameplayState>();
             AddTransition(bootstrapState, gameplayState, new FuncPredicate(() => GameplaySceneLoaded));
+            AddTransition(gameplayState, bootstrapState, new FuncPredicate(() => RestartInvoked));
             SetState(bootstrapState);
         }
 
