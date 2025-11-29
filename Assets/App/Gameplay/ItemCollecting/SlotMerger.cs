@@ -11,6 +11,7 @@ namespace App.Gameplay.ItemCollecting
 {
     public class SlotMerger: IInitializable, IDisposable
     {
+        public event Action<bool> OnSlotMergerHandleCollectedItem;
         public const int MERGE_COUNT = 3;
         private List<ItemOnUI> _mergedItems;
         private readonly ItemCollector _collector;
@@ -45,6 +46,7 @@ namespace App.Gameplay.ItemCollecting
                 if(slot.ItemType == ItemType.None) continue;
                 if(_mergedItems.Contains(slot.Item)) continue;
                 if(_itemCollectAnimator.ItemIsMovingToSlot(slot.Item)) continue;
+                
                 if (slot.ItemType != itemType)
                 {
                     itemType = slot.ItemType;
@@ -54,15 +56,23 @@ namespace App.Gameplay.ItemCollecting
                 else
                 {
                     slots.Add(slot);
-                    if (slots.Count >= MERGE_COUNT)
-                    {
-                        Debug.Log($"Try Merge Items");
-                        _mergedItems.AddRange(slots.Select(x => x.Item));
-                        _collectedItemsAnimator.MergeSlotsAnimation(slots, OnMergeSlotsAnimationCompleteHandler);
-                        return;
-                    }
+                    if (TryMergeSlots(slots)) return;
                 }
             }
+            OnSlotMergerHandleCollectedItem?.Invoke(false);
+        }
+
+        private bool TryMergeSlots(List<CollectedItemSlot> slots)
+        {
+            if (slots.Count >= MERGE_COUNT)
+            {
+                _mergedItems.AddRange(slots.Select(x => x.Item));
+                _collectedItemsAnimator.MergeSlotsAnimation(slots, OnMergeSlotsAnimationCompleteHandler);
+                OnSlotMergerHandleCollectedItem?.Invoke(true);
+                return true;
+            }
+
+            return false;
         }
 
         private void OnMergeSlotsAnimationCompleteHandler(List<ItemOnUI> items)

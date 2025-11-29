@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using App.Factories;
 using App.Gameplay.Common;
@@ -27,7 +28,11 @@ namespace App.LifetimeScopes
         {
             RegisterGameplayStates(builder);
             builder.RegisterEntryPoint<GameplayStateFactory>();
-            builder.RegisterEntryPoint<GameplayStateMachine>().AsSelf();
+            builder.RegisterEntryPoint<GameplayStateMachine>()
+                .AsSelf();
+            builder.Register<LevelResultChecker>(Lifetime.Singleton)
+                .As<ILevelResultChecker>()
+                .As<IDisposable>();
             builder.Register<Timer>(Lifetime.Singleton);
             builder.RegisterInstance(testLevel);
 
@@ -39,7 +44,9 @@ namespace App.LifetimeScopes
             
             builder.Register<LeftToCollectItemsContainer>(Lifetime.Singleton);
             
-            builder.Register<ItemCollector>(Lifetime.Singleton).AsSelf().As<IItemCollector>();
+            builder.Register<ItemCollector>(Lifetime.Singleton)
+                .AsSelf()
+                .As<IItemCollector>();
             builder.Register<ItemCollectAnimator>(Lifetime.Singleton);
             builder.RegisterInstance(itemCollectAnimationConfig);
 

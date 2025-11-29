@@ -11,6 +11,7 @@ namespace App.Gameplay.ItemCollecting
         public event Action<ItemType, int> UpdateLeftToCollect;
         private readonly IItemCollector _itemCollector;
         public Dictionary<ItemType, int> Items { get; private set; }
+        public bool AllItemsCollected => Items.Count == 0;
 
         public LeftToCollectItemsContainer(LevelConfig levelConfig, IItemCollector collector)
         {
@@ -28,9 +29,15 @@ namespace App.Gameplay.ItemCollecting
             if (Items.ContainsKey(itemOnField.Type) == false) return;
 
             Items[itemOnField.Type]--;
-            UpdateLeftToCollect?.Invoke(itemOnField.Type, Items[itemOnField.Type]);
             if (Items[itemOnField.Type] == 0)
+            {
                 Items.Remove(itemOnField.Type);
+                UpdateLeftToCollect?.Invoke(itemOnField.Type, 0);
+            }
+            else
+            {
+                UpdateLeftToCollect?.Invoke(itemOnField.Type, Items[itemOnField.Type]);
+            }
         }
 
         public void Dispose()
