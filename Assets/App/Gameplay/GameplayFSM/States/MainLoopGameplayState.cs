@@ -1,4 +1,5 @@
-﻿using App.Gameplay.Common;
+﻿using App.Gameplay.Cameras;
+using App.Gameplay.Common;
 using App.Gameplay.ItemCollecting;
 using App.Gameplay.Levels;
 using App.UI.CollectedItemsPanel;

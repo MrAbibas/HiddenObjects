@@ -16,5 +16,5 @@ MonoBehaviour:
   zoomSpeed: 3
   minZoom: 2
   maxZoom: 10
-  zoomSmoothTime: 0.2
+  zoomSmoothTime: 10
   pinchZoomSpeed: 0.1
