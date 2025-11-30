@@ -25,6 +25,7 @@ namespace App.LifetimeScopes
         [SerializeField] private List<ItemOnField> itemsOnField;
         [SerializeField] private ItemCollectAnimationConfig itemCollectAnimationConfig;
         [SerializeField] private CollectedItemsAnimationsConfig collectedItemsAnimationsConfig;
+        [SerializeField] private CameraConfig cameraConfig;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -36,8 +37,10 @@ namespace App.LifetimeScopes
                 .As<ILevelResultChecker>()
                 .As<IDisposable>();
             builder.Register<Timer>(Lifetime.Singleton);
+            builder.Register<CameraController>(Lifetime.Singleton);
+            
             builder.RegisterInstance(testLevel);
-
+            builder.RegisterInstance(cameraConfig);
             builder.RegisterInstance(itemsOnField);
             
             builder.Register<CollectedItemsContainer>(Lifetime.Singleton);

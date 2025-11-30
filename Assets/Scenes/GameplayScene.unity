@@ -401,6 +401,7 @@ MonoBehaviour:
   - {fileID: 10901647}
   itemCollectAnimationConfig: {fileID: 11400000, guid: c5e86273b8e526b4d98e4ab6adea1b52, type: 2}
   collectedItemsAnimationsConfig: {fileID: 11400000, guid: 592dd05b2b0f65840a51e98f47cc69cc, type: 2}
+  cameraConfig: {fileID: 11400000, guid: ea0e1826b854c1a49b87fb169f28960c, type: 2}
 --- !u!4 &398423166
 Transform:
   m_ObjectHideFlags: 0

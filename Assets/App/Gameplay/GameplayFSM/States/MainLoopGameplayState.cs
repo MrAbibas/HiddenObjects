@@ -16,13 +16,15 @@ namespace App.Gameplay.GameplayFSM.States
         private readonly CollectedItemsPanel _collectedItemsPanel;
         private readonly LeftToCollectItemsContainer _leftToCollectItemsContainer;
         private readonly SlotMerger _slotMerger;
+        private readonly CameraController _cameraController;
 
         public MainLoopGameplayState(Timer levelTimer,
             HUD hud,
             IItemCollector itemCollector,
             CollectedItemsPanel collectedItemsPanel,
             LeftToCollectItemsContainer leftToCollectItemsContainer,
-            SlotMerger slotMerger)
+            SlotMerger slotMerger,
+            CameraController cameraController)
         {
             _levelTimer = levelTimer;
             _hud = hud;
@@ -30,6 +32,7 @@ namespace App.Gameplay.GameplayFSM.States
             _collectedItemsPanel = collectedItemsPanel;
             _leftToCollectItemsContainer = leftToCollectItemsContainer;
             _slotMerger = slotMerger;
+            _cameraController = cameraController;
         }
 
         public void Enter()
@@ -40,11 +43,13 @@ namespace App.Gameplay.GameplayFSM.States
             _leftToCollectItemsContainer.Initialize();
             _hud.Initialize();
             _slotMerger.Initialize();
+            _cameraController.Initialize();
         }
 
         public void Update()
         {
             _levelTimer.Tick(Time.deltaTime);
+            _cameraController.Tick();
         }
 
         public void Exit()
