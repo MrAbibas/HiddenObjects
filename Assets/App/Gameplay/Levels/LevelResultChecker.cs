@@ -26,7 +26,6 @@ namespace App.Gameplay.Levels
 
         public void Initialize()
         {
-            _leftToCollectItemsContainer.UpdateLeftToCollect += UpdateLeftToCollectHandler;
             _slotMerger.OnSlotMergerHandleCollectedItem += OnSlotMergerHandleCollectedItemHandler;
             _levelTimer.OnTimerCompleted += OnTimerCompletedHandler;
             _levelWin = false;
@@ -40,16 +39,16 @@ namespace App.Gameplay.Levels
 
         private void OnSlotMergerHandleCollectedItemHandler(bool isMerged)
         {
+            if (_leftToCollectItemsContainer.AllItemsCollected)
+            {
+                _levelWin = true;
+                return;
+            }
             if (isMerged) return;
             if (_collectedItemsContainer.HasEmptySlots) return;
             if (_slotMerger.MergeAvailable()) return;
             
             _levelLose = true;
-        }
-
-        private void UpdateLeftToCollectHandler(ItemType itemType, int count)
-        {
-            if(_leftToCollectItemsContainer.AllItemsCollected) _levelWin = true;
         }
 
         public bool LevelWin() => _levelWin;
@@ -58,7 +57,6 @@ namespace App.Gameplay.Levels
 
         public void Dispose()
         {
-            _leftToCollectItemsContainer.UpdateLeftToCollect -= UpdateLeftToCollectHandler;
             _slotMerger.OnSlotMergerHandleCollectedItem -= OnSlotMergerHandleCollectedItemHandler;
         }
     }
