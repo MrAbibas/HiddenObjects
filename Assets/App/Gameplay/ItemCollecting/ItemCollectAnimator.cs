@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using App.Gameplay.Items;
 using App.UI.CollectedItemsPanel;
 using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 using UnityEngine;
 
 namespace App.Gameplay.ItemCollecting

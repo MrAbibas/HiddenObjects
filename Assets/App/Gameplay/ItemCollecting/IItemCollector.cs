@@ -4,7 +4,7 @@ using VContainer.Unity;
 
 namespace App.Gameplay.ItemCollecting
 {
-    public interface IItemCollector: IInitializable
+    public interface IItemCollector: IInitializable,  IDisposable
     {
         event Action<ItemOnField> OnItemCollected;
         bool CollectingEnabled { get;}

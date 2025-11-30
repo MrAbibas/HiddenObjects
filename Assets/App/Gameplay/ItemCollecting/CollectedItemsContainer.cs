@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using App.Gameplay.Items;
 using App.UI.CollectedItemsPanel;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace App.Gameplay.ItemCollecting
 {
     public class CollectedItemsContainer
     {
+        public event Action OnItemsRemoved;
         private readonly CollectedItemsPanel _collectedItemsPanel;
         private readonly CollectedItemsContainerAnimator _animator;
         public bool HasEmptySlots => Slots.Any(x => x.ItemType == ItemType.None);
@@ -64,7 +67,6 @@ namespace App.Gameplay.ItemCollecting
                 Object.Destroy(item.gameObject);
                 slot?.ClearItem();
             }
-
             int emptyInd = -1;
             for (int i = 0; i < Slots.Count; i++)
             {
@@ -82,6 +84,7 @@ namespace App.Gameplay.ItemCollecting
                     emptyInd = -1;
                 }
             }
+            OnItemsRemoved?.Invoke();
         }
     }
 }
