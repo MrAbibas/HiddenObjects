@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using App.Gameplay.Items;
 using App.UI.CollectedItemsPanel;
 using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 using UnityEngine;
 
 namespace App.Gameplay.ItemCollecting
@@ -85,7 +83,7 @@ namespace App.Gameplay.ItemCollecting
         public bool ItemIsMovingToSlot(ItemOnUI itemOnUI)
         {
             if (_movingToSlotItems.TryGetValue(itemOnUI, out var data) == false) return false;
-            return data.sequence.IsPlaying();
+            return data.sequence.IsActive() && data.sequence.IsPlaying();
         }
     }
 }

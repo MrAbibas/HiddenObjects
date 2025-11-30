@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using App.Gameplay.Items;
-using App.UI.CollectedItemsPanel;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -38,18 +37,22 @@ namespace App.Gameplay.ItemCollecting
         
         public void Initialize()
         {
+            _collectedItemsContainer.OnItemsRemoved += OnItemsRemovedHandler;
             foreach (var item in _activeItems)
             {
                 item.OnClick.AddListener(OnItemClicked);
             }
         }
-
+        
         private void OnItemClicked(ItemOnField itemOnField)
         {
             if (CollectingEnabled == false) return;
-            if (CanCollect(itemOnField) == false) return;
-
-            if (_queuedItems.Contains(itemOnField)) return;
+            if (CanCollect(itemOnField) == false)
+            {
+                if (_queuedItems.Contains(itemOnField)) return;
+                _queuedItems.Enqueue(itemOnField);
+                return;
+            }
 
             CollectItem(itemOnField);
         }
@@ -83,6 +86,10 @@ namespace App.Gameplay.ItemCollecting
         private void OnCollectAnimationCompleteHandler()
         {
             OnCollectAnimationComplete?.Invoke();
+        }
+        
+        private void OnItemsRemovedHandler()
+        {
             if (_queuedItems.Count > 0)
                 CollectItem(_queuedItems.Dequeue());
         }
@@ -90,6 +97,11 @@ namespace App.Gameplay.ItemCollecting
         public bool CanCollect(ItemOnField item)
         {
             return _collectedItemsContainer.HasEmptySlots;
+        }
+
+        public void Dispose()
+        {
+            _collectedItemsContainer.OnItemsRemoved -= OnItemsRemovedHandler;
         }
     }
 }
