@@ -71,7 +71,6 @@ namespace App.Gameplay.ItemCollecting
 
             var centerSlot = slots[centerInd];
             var centerItem = centerSlot.Item;
-            items.Add(centerItem);
             rectTransform = centerSlot.Item.transform as RectTransform;
             seq.Append(rectTransform
                     .DOJumpAnchorPos(_animationsConfig.MergeCenterItemJumpOffset + centerSlot.AnchorPos,

@@ -63,7 +63,7 @@ namespace App.Gameplay.ItemCollecting
         {
             foreach (var item in items)
             {
-                var slot = Slots.FirstOrDefault(x => x.ItemType == item.Type);
+                var slot = Slots.FirstOrDefault(x => x.Item == item);
                 Object.Destroy(item.gameObject);
                 slot?.ClearItem();
             }
